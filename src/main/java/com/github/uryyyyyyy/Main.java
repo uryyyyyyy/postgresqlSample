@@ -45,7 +45,7 @@ public class Main {
     protected DataSource createDataSource() {
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
         dataSource.setDriverClass(org.postgresql.Driver.class);
-        dataSource.setUrl("jdbc:postgresql://localhost/spring4_sample");
+        dataSource.setUrl("jdbc:postgresql://localhost/my_database");
         dataSource.setUsername("postgres");
         dataSource.setPassword("postgres");
         return dataSource;
