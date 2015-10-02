@@ -1,4 +1,5 @@
 create table table2(
-  id smallint PRIMARY KEY,
-  name varchar(255)
+  date_time timestamp NOT NULL,
+  only_date date NOT NULL,
+  only_time time NOT NULL
 );

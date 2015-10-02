@@ -1,4 +1,6 @@
-package com.github.uryyyyyyy;
+package com.github.uryyyyyyy.table2;
+
+import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -8,7 +10,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Component;
@@ -16,13 +17,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.uryyyyyyy.table1.Main;
 
 @Component
 @Configuration
 @ComponentScan
 @EnableTransactionManagement
-public class Table2 {
+public class Main {
 
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
@@ -30,16 +30,13 @@ public class Table2 {
     }
 
     @Autowired
-    private DataSource dataSource;
+    private Table2Dao table1Dao;
 
     @Transactional
     public void run() {
-        final String name = "たろう";
-        final Integer age = 20;
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-        jdbcTemplate.update("INSERT INTO users (name, age) VALUES (?, ?)", name, age);
-        // TODO ここで自動生成された id の値を取得する
+        table1Dao.insert();
+        Set<Table2Entity> es = table1Dao.selectAll();
+        System.out.println(es);
     }
 
     @Bean
@@ -57,4 +54,5 @@ public class Table2 {
     protected PlatformTransactionManager createTransactionManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
+
 }
