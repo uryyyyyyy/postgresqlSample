@@ -35,6 +35,7 @@ public class Main {
         Table1Entity e = table1Dao.selectOne(3).get();
 //        Set<Table1Entity> es = table1Dao.select();
         System.out.println(e);
+        table1Dao.update(2, "hoge");
     }
 
     @Bean

@@ -49,17 +49,11 @@ public class Table1Dao {
         throw new RuntimeException();
     }
 
-    public Table1Entity update() {
-        Table1Entity e = new Table1Entity(null, "なまえ");
-        SimpleJdbcInsert insert = new SimpleJdbcInsert(dataSource).withTableName("table1").usingGeneratedKeyColumns("id");
-
-        SqlParameterSource param = new BeanPropertySqlParameterSource(e);
-        if(e.getId() == null) {
-            Number key = insert.executeAndReturnKey(param);
-            e.setId(key.intValue());
-            return e;
-        }
-        throw new RuntimeException();
+    public void update(int id, String name) {
+        Table1Entity e = new Table1Entity(id, name);
+        new NamedParameterJdbcTemplate(new JdbcTemplate(dataSource)).update(
+                "UPDATE table1 SET name = :name where id = :id",
+                new BeanPropertySqlParameterSource(e));
     }
 
     public Set<Table1Entity> selectAll() {
@@ -75,5 +69,10 @@ public class Table1Dao {
         }catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
+    }
+
+    public void delete(int id) {
+        new JdbcTemplate(dataSource).update(
+                "DELETE FROM table1 where id = ? ", id);
     }
 }
