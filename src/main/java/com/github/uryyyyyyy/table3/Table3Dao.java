@@ -4,14 +4,12 @@ import java.sql.Array;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -40,13 +38,8 @@ public class Table3Dao {
                 .stream().collect(Collectors.toSet());
     }
 
-    public Optional<Table3Entity> selectOne(int id) {
-        try {
-            Table3Entity e = new JdbcTemplate(dataSource).queryForObject("select * from table1 where id = ?",
-                    BeanPropertyRowMapper.newInstance(Table3Entity.class), id);
-            return Optional.of(e);
-        }catch (EmptyResultDataAccessException e) {
-            return Optional.empty();
-        }
+    public Set<Table3Entity> selectContains(int key) {
+        return new JdbcTemplate(dataSource).query("select * from table3 WHERE ? = ANY (keys)", BeanPropertyRowMapper.newInstance(Table3Entity.class), key)
+                .stream().collect(Collectors.toSet());
     }
 }

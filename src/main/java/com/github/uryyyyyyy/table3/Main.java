@@ -36,8 +36,8 @@ public class Main {
 
     @Transactional
     public void run() throws SQLException {
-        table1Dao.insert();
-        Set<Table3Entity> es = table1Dao.selectAll();
+//        table1Dao.insert();
+        Set<Table3Entity> es = table1Dao.selectContains(3);
         es.stream().forEach(v -> {
             try {
                 Integer[] keys_ = (Integer[]) v.getKeys().getArray();
