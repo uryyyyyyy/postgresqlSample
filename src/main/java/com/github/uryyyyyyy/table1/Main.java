@@ -32,7 +32,8 @@ public class Main {
 
     @Transactional
     public void run() {
-        Table1Entity e = table1Dao.insert();
+        Table1Entity e = table1Dao.selectOne(3).get();
+//        Set<Table1Entity> es = table1Dao.select();
         System.out.println(e);
     }
 
