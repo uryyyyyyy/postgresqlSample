@@ -1,4 +1,4 @@
 create table table1(
-  id smallint PRIMARY KEY,
-  name varchar(255)
+  id SERIAL PRIMARY KEY,
+  name varchar(255) NOT NULL
 );

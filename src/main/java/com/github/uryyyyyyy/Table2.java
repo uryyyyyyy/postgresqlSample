@@ -16,12 +16,13 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.uryyyyyyy.table1.Main;
 
 @Component
 @Configuration
 @ComponentScan
 @EnableTransactionManagement
-public class Main {
+public class Table2 {
 
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(Main.class);
@@ -56,5 +57,4 @@ public class Main {
     protected PlatformTransactionManager createTransactionManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
-
 }
