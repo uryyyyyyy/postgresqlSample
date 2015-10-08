@@ -7,12 +7,20 @@
 # install
 sudo apt-get install postgresql-9.3
 
+# access
+sudo su postgres
+psql
+
+# in postgreSQL
+\password # add password
+\q # exit
+
 # change auth peer -> md5
 sudo vim /etc/postgresql/9.3/main/pg_hba.conf
 # local all  postgres md5
 
 # login with psql
-psql -U postgres
+psql -U postgres # use password you set.
 
 # create new database
 create database my_database owner postgres encoding 'UTF8';
