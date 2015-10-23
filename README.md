@@ -33,6 +33,18 @@ create database my_database owner postgres encoding 'UTF8';
 
 ```
 
+if you want to access from remote client
+
+```
+sudo vim /etc/postgresql/9.3/main/postgresql.conf
+# enable listen_addresses = '*'
+
+sudo vim /etc/postgresql/9.3/main/pg_hba.conf
+# enable remote access as md5
+# host    all             all             0.0.0.0/0            md5
+
+```
+
 ## table1
 
 sample for PK
